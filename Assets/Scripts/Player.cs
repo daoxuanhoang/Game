@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 40f, maxspeed = 3, jumpPow = 5f;
+    public float speed = 40f, maxspeed = 3;
+    public Vector2 jumpHeight;
     public Rigidbody2D rigidbody2D;
     public bool faceRight = true;
+    public int Hscore = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rigidbody2D.AddForce(new Vector2(0f, jumpPow));
+            rigidbody2D.AddForce(jumpHeight, ForceMode2D.Impulse);
         }
         if (h > 0 && !faceRight)
         {
@@ -52,5 +54,11 @@ public class Player : MonoBehaviour
         scale = transform.localScale;
         scale.x *= -1;
         this.transform.localScale = scale;
+    }
+
+    
+    public void increaseScore (int score)
+    {
+        Hscore += score;
     }
 }
